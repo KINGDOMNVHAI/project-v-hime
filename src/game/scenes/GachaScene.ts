@@ -10,21 +10,26 @@ export default class GachaScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("cardback", "/assets/ui/cardback.png");
-        this.load.image("buttonGacha", "/assets/ui/buttonGacha.png");
-        this.load.image("buttonGacha10", "/assets/ui/buttonGacha10.png");
+        this.load.image("bgGacha", "/assets/bg/bg-lava.jpg");
+        this.load.image("cardback", "/assets/card/cardback.png");
+        this.load.image("btnGacha10", "/assets/ui/btnGacha10.png");
 
         // Load tất cả ảnh trong cardPool
         cardPool.forEach((card) => {
             this.load.image(card.id, card.image);
         });
+
+        this.load.audio("flipCardSound", "/assets/audio/flipcard.mp3");
     }
 
     create() {
+        this.children.removeAll();
+        this.add.image(600, 300, "bgGacha").setOrigin(0.5).setDepth(0);
+
         this.add.text(300, 50, "Gacha Scene", { fontSize: "32px", color: "#fff" });
 
-        const roll1Btn = this.add.image(300, 500, "buttonGacha").setInteractive();
-        const roll10Btn = this.add.image(500, 500, "buttonGacha10").setInteractive();
+        const roll1Btn = this.add.image(120, 500, "btnGacha").setInteractive().setScale(0.15);
+        const roll10Btn = this.add.image(500, 500, "btnGacha10").setInteractive().setScale(0.15);
 
         roll1Btn.on("pointerdown", () => this.rollGacha(1));
         roll10Btn.on("pointerdown", () => this.rollGacha(10));
@@ -34,7 +39,9 @@ export default class GachaScene extends Phaser.Scene {
             color: "#00ffff",
         }).setInteractive();
 
-        backText.on("pointerdown", () => this.scene.start("MenuScene"));
+        backText.on("pointerdown", () => {
+            this.scene.start("MenuScene");
+        });
     }
 
     rollGacha(count: number) {
@@ -71,8 +78,6 @@ export default class GachaScene extends Phaser.Scene {
 
     showCards(cards: Card[]) {
         this.children.removeAll();
-        this.load.audio("flipSound", "/assets/sfx/flip.mp3");
-        this.sound.play("flipSound");
 
         this.add.text(520, 40, "Gacha Results", {
             fontSize: "28px",
@@ -104,6 +109,7 @@ export default class GachaScene extends Phaser.Scene {
                     duration: 200,
                     ease: "Linear",
                     onComplete: () => {
+                        this.sound.play("flipCardSound");
                         // Đổi ảnh từ cardback → thẻ thật
                         back.setTexture(card.id);
 

@@ -15,14 +15,14 @@ export default function GameCanvas() {
             // dynamic import Phaser chỉ khi chạy client
             const Phaser = await import("phaser"); // import * as Phaser không cần ở top-level
             // dynamic import các scene (module phải export default class Scene extends Phaser.Scene)
-            const { default: MenuScene } = await import("@/game/scenes/MenuScene");
+            const { default: MenuScene } = await import("@/game/scenes/MainScene");
             const { default: GachaScene } = await import("@/game/scenes/GachaScene");
             // (nếu có thêm scene: const { default: BattleScene } = await import('@/game/scenes/BattleScene'))
 
             const config: Phaser.Types.Core.GameConfig = {
                 type: Phaser.AUTO,
-                width: 1280,
-                height: 720,
+                width: 1200,
+                height: 700,
                 backgroundColor: "#1a1a1a",
                 parent: "game-container",
                 scene: [MenuScene, GachaScene],

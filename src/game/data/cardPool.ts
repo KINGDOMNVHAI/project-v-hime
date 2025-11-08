@@ -11,9 +11,9 @@ export interface Card {
 
 export const cardPool: Card[] = [
     // Kami
-    { id: "k_r_1", name: "Kami A", type: "Kami", rarity: "R", image: "/assets/cards/kami_r.png" },
+    { id: "k_r_1", name: "Kami A", type: "Kami", rarity: "R", image: "/assets/cards/hell-beast.png" },
     { id: "k_sr_1", name: "Kami B", type: "Kami", rarity: "SR", image: "/assets/cards/kami_sr.png" },
-    { id: "k_ssr_1", name: "Kami C", type: "Kami", rarity: "SSR", image: "/assets/cards/kami_ssr.png" },
+    { id: "k_ssr_1", name: "Kami C", type: "Kami", rarity: "SSR", image: "/assets/cards/jigokun-the-hell-doll.png" },
 
     // Weapon
     { id: "w_r_1", name: "Sword A", type: "Weapon", rarity: "R", image: "/assets/cards/weapon_r.png" },
